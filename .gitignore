@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+.venv-build/
+venv/
+build/
+dist/
+*.spec
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Simulator/training outputs and large licensed assets
+logs/
+results/
+checkpoints/
+*.ckpt
+*.pth
+*.pt
+*.onnx
+*.npz
+*.bvh
+*.fbx
+
+# Local experiment / editor files
+.env
+.vscode/
+.idea/

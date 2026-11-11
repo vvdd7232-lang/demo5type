@@ -1,0 +1,44 @@
+name: Build Arch Linux binary
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - "arena/5cea4036-demo5type"
+
+permissions:
+  contents: read
+
+jobs:
+  build-arch-linux-x86-64:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Build and test inside Arch Linux
+        shell: bash
+        run: |
+          docker run --rm --pull=always \
+            --volume "$GITHUB_WORKSPACE:/workspace" \
+            --workdir /workspace \
+            archlinux:latest \
+            bash -euc '
+              pacman -Syu --noconfirm
+              pacman -S --needed --noconfirm python python-pip file
+              python --version
+              python -m unittest discover -s tests -v
+              bash scripts/build_linux.sh
+              file artifacts/linux-arch-x86_64/demo5type
+              ldd --version | head -n 1
+            '
+
+      - name: Upload Arch Linux x86_64 binary
+        uses: actions/upload-artifact@v4
+        with:
+          name: demo5type-arch-linux-x86_64
+          path: |
+            artifacts/linux-arch-x86_64/demo5type
+            artifacts/linux-arch-x86_64/demo5type.sha256
+          if-no-files-found: error
+          retention-days: 14

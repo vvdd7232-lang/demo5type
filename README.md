@@ -49,6 +49,16 @@ python -m demo5type.preflight --require-cuda --require-sim
 
 EXE не подписан цифровым сертификатом, поэтому Windows может показать предупреждение SmartScreen. Не отключайте защиту системы ради запуска; сверяйте SHA-256 и собирайте из исходников, если Windows блокирует неизвестный бинарник.
 
+## Linux / Arch Linux x86_64
+
+Сборка выполняется внутри настоящего Arch Linux x86_64 контейнера workflow **Build Arch Linux binary**; artifact: `demo5type-arch-linux-x86_64`. Для сборки непосредственно на Arch запустите:
+
+```bash
+bash scripts/build_linux.sh
+```
+
+Скрипт создаёт изолированное `.venv-build-linux`, устанавливает PyInstaller и smoke-тестирует файл. Результат: `artifacts/linux-arch-x86_64/demo5type` и SHA-256. Бинарник не требует системного Python. Это всё ещё консольное dry-run демо, не Isaac Sim и не GPU-симуляция.
+
 ## Подключение к симулятору
 
 ### Isaac Lab: сначала короткий smoke-тест

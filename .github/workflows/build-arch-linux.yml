@@ -33,12 +33,17 @@ jobs:
               ldd --version | head -n 1
             '
 
+      - name: Package binary and checksum with Unix permissions
+        shell: bash
+        run: |
+          tar -C artifacts/linux-arch-x86_64 \
+            -czf artifacts/demo5type-arch-linux-x86_64.tar.gz \
+            demo5type demo5type.sha256
+
       - name: Upload Arch Linux x86_64 binary
         uses: actions/upload-artifact@v4
         with:
           name: demo5type-arch-linux-x86_64
-          path: |
-            artifacts/linux-arch-x86_64/demo5type
-            artifacts/linux-arch-x86_64/demo5type.sha256
+          path: artifacts/demo5type-arch-linux-x86_64.tar.gz
           if-no-files-found: error
           retention-days: 14

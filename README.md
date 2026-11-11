@@ -51,7 +51,17 @@ EXE не подписан цифровым сертификатом, поэто�
 
 ## Linux / Arch Linux x86_64
 
-Сборка выполняется внутри настоящего Arch Linux x86_64 контейнера workflow **Build Arch Linux binary**; artifact: `demo5type-arch-linux-x86_64`. Для сборки непосредственно на Arch запустите:
+Сборка выполняется внутри настоящего Arch Linux x86_64 контейнера workflow **Build Arch Linux binary**; artifact: `demo5type-arch-linux-x86_64`. Artifact загружается как ZIP; после распаковки ZIP распакуйте вложенный tarball, чтобы сохранить право исполнения:
+
+```bash
+tar -xzf demo5type-arch-linux-x86_64.tar.gz
+sha256sum -c demo5type.sha256
+./demo5type
+```
+
+Если у вас уже скачана прежняя версия artifact напрямую с бинарником внутри ZIP, после распаковки выполните `chmod +x demo5type`, затем `./demo5type`.
+
+Для сборки непосредственно на Arch запустите:
 
 ```bash
 bash scripts/build_linux.sh
